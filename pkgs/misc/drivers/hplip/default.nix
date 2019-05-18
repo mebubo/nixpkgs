@@ -12,16 +12,16 @@
 let
 
   name = "hplip-${version}";
-  version = "3.19.1";
+  version = "3.18.5";
 
   src = fetchurl {
     url = "mirror://sourceforge/hplip/${name}.tar.gz";
-    sha256 = "1kl1q4753xx1w76dhp92wgrhn5k1yx1ib35pyi0vi3mw0njbhrzm";
+    sha256 = "0xb7ga2wgbwjxsss67mjn2y6fmqsfwzmv11ivvfzhnl36lh22hkb";
   };
 
   plugin = fetchurl {
     url = "https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/${name}-plugin.run";
-    sha256 = "1fwjypy1ycyi7rr1vk1yxhbdhx51n7fxhvjb36mzw8qz71dif2i3";
+    sha256 = "1jf74jya071zqvwhy9n0c3007pzgcxydkw7qdh4sx70brly81i7p";
   };
 
   hplipState = substituteAll {
@@ -78,7 +78,6 @@ pythonPackages.buildPythonApplication {
     sip
   ] ++ stdenv.lib.optionals withQt5 [
     pyqt5
-    enum-compat
   ];
 
   makeWrapperArgs = [ "--prefix" "PATH" ":" "${nettools}/bin" ];
@@ -221,6 +220,6 @@ pythonPackages.buildPythonApplication {
       then licenses.unfree
       else with licenses; [ mit bsd2 gpl2Plus ];
     platforms = [ "i686-linux" "x86_64-linux" "armv6l-linux" "armv7l-linux" ];
-    maintainers = with maintainers; [ ttuegel ];
+    maintainers = with maintainers; [ jgeerds ttuegel ];
   };
 }
